@@ -95,7 +95,7 @@ public class MemberController {
 		
 		
 		int num=member.getNum();
-		//String name = member.getName(); //?
+		String name = member.getName(); //?
 		//System.out.println(name);
 
 		if (member == null) {
@@ -108,11 +108,11 @@ public class MemberController {
 			
 			session.setAttribute("memberInfo", num);
 			//session.setAttribute("memberInfo", member);
-			model.addAttribute("member", member); //의미가 없음
-			System.out.println(member);
+			model.addAttribute("name", name); //의미가 없음
+			System.out.println(name);
 			
 			return "home";
-		} // else 밖에 return을 안써도 되는지 쓴다면 이유는?
+		} 
 
 	}
 
