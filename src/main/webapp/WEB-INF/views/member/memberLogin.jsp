@@ -11,20 +11,20 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function submitCheck() {
-		alert("확인");
 		var id = $('#id').val();
 		var password = $('#password').val();
 
 		$.ajax({
 			type : "POST",
 			url : 'login.do',
-			data : {
+			data : {//이런 형식을 보내면 제이슨 형태로 알아서 바꿔서 보낸다.
 				id : id,
 				password : password
-			},//실행안됨
-			success : function(data) {
-				if (data == "false")
+			},
+			success : function(response) {
+				if (response == "false")
 					alert('잘못된 아이디이거나, 비밀번호가 틀렸습니다.');
+				//질문: 틀려도 홈으로 돌아갑니다요..
 				else
 					alert('로그인에 성공하였습니다.');
 					location.href = "home.do"; //로그인하면 home.do로 돌아가시면 됩니다.
@@ -39,9 +39,9 @@
 			<legend>로그인</legend>
 			아이디 : <input type="text" id="id" name="id" /> <br /> 
 			비밀번호 : <input type="password" id="password" name="password" />
-			<!-- vo와 같게 해야되는지 password는 password id는 id -->
 			<input type="button" value="로그인" onclick="submitCheck()" />
 		</fieldset>
+		<a href="join.do">회원가입 </a>
 	</form>
 </body>
 </html>

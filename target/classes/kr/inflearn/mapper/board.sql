@@ -10,6 +10,32 @@ create table tb_board(
 	
  );
  
+ drop table tb_board;
+ 
+ 
+ create table tb_board2(
+
+	board_id int not null auto_increment, 
+	writer varchar(50) not null, 
+	title varchar(50) not null, 
+	contents varchar(4000) not null, 
+	count int,
+	regdate datetime not null default current_timestamp,
+	updatedate DATETIME ON UPDATE CURRENT_TIMESTAMP,
+	primary key(board_id)
+	
+ );
+ 
+ SELECT *
+ FROM tb_board2;
+ 
+ insert into tb_board2(writer, title, contents, count)
+ values('관리자','게시판 만들기','게시판 만들기',0);
+ 
+  insert into tb_board2(writer, title, contents, count)
+ values('관리자','이거되는거 맞아?','이거 되는거 맞아',0);
+ 
+ 
  create table member(
  	
 		 num int not null auto_increment,

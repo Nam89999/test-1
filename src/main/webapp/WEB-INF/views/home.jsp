@@ -10,10 +10,10 @@
 </head>
 <body> 
 	<ul>
-	    <c:if test="${sessionScope.memberInfo==null || sessionScope.memberInfo==''}">
+	    <c:if test="${sessionScope.memberNum==null || sessionScope.memberNum==''}">
 	   	    <a href="<c:url value='/login.do'/>">로그인</a>   
 	   </c:if>		
-     <c:if test="${name!=null && name!=''}">
+     	<c:if test="${sessionScope.memberNum!= null && sessionScope.memberNum!= ''}">
 	   		<h4><a href="<c:url value='/readMember.do'/>">${name} </a></h4>환영합니다!
 	    <a href="<c:url value='/logout.do'/>">로그아웃</a>   
 		</c:if>

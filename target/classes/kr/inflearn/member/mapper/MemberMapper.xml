@@ -22,7 +22,7 @@
 
 <update id="updatemember" parameterType="MemberVO">
     update member set age=#{age},email=#{email},phone=#{phone}
-    where num=#{num}
+    where id=#{id}
 </update>
 
 

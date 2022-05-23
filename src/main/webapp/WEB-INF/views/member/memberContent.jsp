@@ -13,7 +13,9 @@
   <script type="text/javascript">
   
 	$(document).ready(()=>{
-  		//modify를 누르면 일단 게시물 id(idx)를 받아와야한다. 2.modify.do로 보내버린다. 3.게시판 id를 가지고 가야한다. 
+		// $(document).ready 문서가 준비되면 매개변수로 넣은 콜백 함수를 실행하라는 의미입니다.
+		// $(function(){}); 같은 의미이다.
+		// modify를 누르면 일단 게시물 id(idx)를 받아와야한다. 2.modify.do로 보내버린다. 3.게시판 id를 가지고 가야한다. 
 		$("#modify").click(()=>{
 			location.href="<c:url value='/memberModify.do'/>";
 		});

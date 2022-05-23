@@ -5,15 +5,18 @@ import java.util.List;
 import kr.inflearn.model.BoardVO;
 
 public interface BoardService {
-	//게시판 목록 불러오기
-	public List<BoardVO> getList();
-	//게시물 등록
-	public void register(BoardVO board);
-	//게시물 상세보기
-	public BoardVO get(int bno,String mode);
-	//게시물 삭제
-	public int remove(int bno);
-	//게시물 수정
-	public int modify(BoardVO board);
+	//서비스 annotation을 여기에 안해주는 이유?
 	
+	//게시판 리스트 불러오기
+	public List<BoardVO> getBoardList();
+	
+	//게시판 올리기
+	public int registerBoard(BoardVO boardVO);
+
+	//게시물 상세보기
+	public BoardVO getBoard(int boardnum);
+
+	//게시물 수정하기
+	public int modifyBoard(BoardVO boardVO);
+
 }

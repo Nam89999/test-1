@@ -6,24 +6,25 @@ import org.apache.ibatis.annotations.Mapper;
 
 import kr.inflearn.model.BoardVO;
 
-//영속계층 
 @Mapper
 public interface BoardMapper {
-	
-	//게시판 목록 불러오기
-	public List<BoardVO> getList();
-	//게시물 등록
-	public void insert(BoardVO board);
-	//게시물 상세보기
-	public BoardVO read(int bno);
-	//게시물 삭제
-	public int delete(int bno);
-	//게시물 수정
-	public int update(BoardVO board);
-	// 조회수 증가
-	public int count(int bno);
-	
-	//xml mapper file 연동
-	//api 추가해서 annotation 생성
+
+	// 게시판 목록 불러오기
+	public List<BoardVO> readboardList();
+	/*
+	 * 입력변수 : 리스트 불러오기에는 따로 입력 값을 받읋 필요가 없다. 리턴 값: 뿌려줄 게시물 리스트
+	 */
+
+	// 게시물 올리기
+	public int insertBoard(BoardVO boardVO);
+	/*
+	 * 입력변수 : 클라이언트가 입력한 게시글(type BoardVO) 리턴 값: int 성공여부(0은 실패/1은 성공)
+	 */
+
+	// 게시글 상세 보기
+	public BoardVO readBoardContents(int boardnum);
+
+	// 게시물 수정하기
+	public int updatBoard(BoardVO boardVO);
 
 }

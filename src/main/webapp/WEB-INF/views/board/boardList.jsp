@@ -14,7 +14,7 @@
   <script type="text/javascript">
   $(document).ready(function(){
 	$("#regBtn").click(()=>{ 
-		location.href="<c:url value='/register.do'/>";	
+		location.href="<c:url value='/registerBoard.do'/>";	
 	});
 	  
   });
@@ -42,20 +42,20 @@
       </tr>
     </thead>
     <tbody>
-    <c:forEach var="vo" items="${list}">
+    <c:forEach var="bvo" items="${boardList}">
       <tr>
-        <td>${vo.idx}</td>
-        <td><a href="<c:url value='/get.do?bno=${vo.idx}'/>" >${vo.title}</a></td><!--상세보기 요청 -->
-        <td>${vo.count}</td>
-        <td>${vo.writer}</td>
-        <td><fmt:formatDate pattern="yyyy-mm-dd" value="${vo.indate}"/></td>
+        <td>${bvo.boardnum}</td>
+        <td><a href="<c:url value='/boardContents.do?bno=${bvo.boardnum}'/>" >${bvo.title}</a></td><!--상세보기 요청 -->
+        <td>${bvo.count}</td>
+        <td>${bvo.writer}</td>
+        <td><fmt:formatDate pattern="yyyy-mm-dd" value="${bvo.regdate}"/></td>
       </tr>
       </c:forEach>
     </tbody>
   </table>
   </div>
 </div>
-    <div class="panel-footer">인프런 화이팅!!</div>
+    <div class="panel-footer">화이팅!!</div>
   </div>
 </div>
 

@@ -37,13 +37,14 @@
 				age : age,
 				email : email,
 				phone : phone
-			},//데이터 처리 다르게 해보기
-			success : function(cnt) {
-				if (cnt == "false")
+			},
+			success : function(response) {
+				if (response == "false")
 					alert("회원가입이 실패하였습니다."); //'', "" 를 써도 무관하다.
+					// 질문:왜 자동적으로 home.do로 이동하는가?
 				else
-					alert("회원가입 성공하였습니다.")
-				location.href = "login.do"; //가입 성공하면 home.do로 돌아가시면 됩니다.
+					alert("회원가입 성공하였습니다.");
+				 location.href = "login.do"; //가입 성공하면 로그인을 하여라.
 			}
 		});
 
@@ -79,9 +80,9 @@
 				<td><input type="text" id="phone" name="phone" /></td>
 			</tr>
 			<tr>
-				<td colspan="2" align="center"><input type="button" id="join"
-					value="회원가입" class="btn btn-primary" onclick="submitSignUp()" /> <input
-					type="reset" value="취소" class="btn btn-warning" /></td>
+				<td colspan="2" align="center">
+				<input type="button" id="join" value="회원가입" class="btn btn-primary" onclick="submitSignUp()" /> 
+			    <input type="reset" value="취소" class="btn btn-warning" /></td>
 			</tr>
 		</table>
 	</form>

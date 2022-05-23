@@ -3,21 +3,35 @@ package kr.inflearn.model;
 import java.util.Date;
 
 public class BoardVO {
+	/*
+	게터 세터는 바구니에 데이터를 넣고 빼주기 위해서 
+	 디폴트 생성자를 만드는 이유? 안만드는 이유?
+	생성자를 만드는 것은 객체를 생성해주기 위해서 아닌가?
+    toString을 쓰는 이유와 안쓰는 이유?
+    */
 	
-	private int idx;
+	//Field
+	private int boardnum;
+	private String writer;
 	private String title;
 	private String contents;
 	private int count;
-	private String writer;
-	private Date indate; //날짜 타입은 String 타입과 혼용이 가능하다
+	private Date regdate;
+	private Date updatedate;
 	
 	
-	
-	public int getIdx() {
-		return idx;
+	//Getter Setter
+	public int getBoardnum() {
+		return boardnum;
 	}
-	public void setIdx(int idx) {
-		this.idx = idx;
+	public void setBoardnum(int boardnum) {
+		this.boardnum = boardnum;
+	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
 	}
 	public String getTitle() {
 		return title;
@@ -37,24 +51,45 @@ public class BoardVO {
 	public void setCount(int count) {
 		this.count = count;
 	}
-	public String getWriter() {
-		return writer;
+	public Date getRegdate() {
+		return regdate;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setRegdate(Date regdate) {
+		this.regdate = regdate;
+	}
+	public Date getUpdatedate() {
+		return updatedate;
+	}
+	public void setUpdatedate(Date updatedate) {
+		this.updatedate = updatedate;
 	}
 	
-	public Date getIndate() {
-		return indate;
+	 
+	//Default Constructor
+	public BoardVO() {
+		super();
 	}
-	public void setIndate(Date indate) {
-		this.indate = indate;
+	
+	//Constructor
+	public BoardVO(int boardnum, String writer, String title, String contents, int count, Date regdate,
+			Date updatedate) {
+		super();
+		this.boardnum = boardnum;
+		this.writer = writer;
+		this.title = title;
+		this.contents = contents;
+		this.count = count;
+		this.regdate = regdate;
+		this.updatedate = updatedate;
 	}
+	
+	
 	@Override
 	public String toString() {
-		return "BoardVO [idx=" + idx + ", title=" + title + ", contents=" + contents + ", count=" + count + ", writer="
-				+ writer + ", indate=" + indate + "]";
+		return "BoardVO [boardnum=" + boardnum + ", writer=" + writer + ", title=" + title + ", contents=" + contents
+				+ ", count=" + count + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
 	
-
+	
+	 
 }
