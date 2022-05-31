@@ -3,8 +3,9 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-  <typeAliases>
-      <typeAlias type="kr.inflearn.model.BoardVO" alias="boardVO"/>     
-      <typeAlias type="kr.inflearn.member.model.MemberVO" alias="memberVO"/>      	  
-  </typeAliases> 
+	<typeAliases>
+		<typeAlias type="kr.inflearn.model.BoardVO" alias="boardVO" />
+		<typeAlias type="kr.inflearn.member.model.MemberVO" alias="memberVO" />
+		<typeAlias type="kr.inflearn.comment.model.CommentVO" alias="commentVO" />
+	</typeAliases>
 </configuration>

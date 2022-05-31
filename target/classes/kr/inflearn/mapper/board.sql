@@ -1,22 +1,8 @@
-create table tb_board(
-
-	idx int not null auto_increment, 
-	title varchar(100) not null, 
-	contents varchar(4000) not null, 
-	count int,
-	writer varchar(30) not null, 
-	indate datetime default now() not null,
-	primary key(idx)
-	
- );
- 
- drop table tb_board;
- 
  
  create table tb_board2(
 
 	board_id int not null auto_increment, 
-	writer varchar(50) not null, 
+	num int not null, 
 	title varchar(50) not null, 
 	contents varchar(4000) not null, 
 	count int,
@@ -26,16 +12,33 @@ create table tb_board(
 	
  );
  
+ drop table tb_board2;
+ 
+ 		SELECT *
+		FROM comment c, tb_board2 b
+		WHERE c.board_id = b.board_id
+		
  SELECT *
  FROM tb_board2;
  
- insert into tb_board2(writer, title, contents, count)
- values('관리자','게시판 만들기','게시판 만들기',0);
+ insert into tb_board2(num, title, contents, count)
+ values('1','게시판 만들기','게시판 만들기',0);
  
-  insert into tb_board2(writer, title, contents, count)
- values('관리자','이거되는거 맞아?','이거 되는거 맞아',0);
+  insert into tb_board2(num, title, contents, count)
+ values('2','이거되는거 맞아?','이거 되는거 맞아',0);
  
- 
+
+
+SELECT *
+FROM tb_board2 b,member m
+WHERE  b.num=m.num;
+
+SELECT m.id as id, m.name as name
+FROM tb_board2 b, member m
+WHERE tb.board_id = 1 AND b.num=m.num;
+
+
+)
  create table member(
  	
 		 num int not null auto_increment,
@@ -47,21 +50,51 @@ create table tb_board(
 		 phone varchar(25) not null,
 		 primary key (num)
  );
- 
- 
+  
  select *from member;
+
+ 
+ drop table member;
+
+
  
  insert into member(id,password,name,age,email,phone)
  values('admin','1234','관리자',19,'admin@google.com0','010-1111-1111');
 
  
- insert into tb_board(title, contents, count, writer)
- values('게시판 만들기','게시판 만들기',0,'관리자');
+  
+ create table comment(
+    comment_id int not null auto_increment,
+    board_id int not null,
+    num int not null,
+    content varchar(150) not null,
+    regdate datetime not null default current_timestamp,
+	primary key(comment_id)
+ );
  
+SELECT* FROM comment;
  
+INSERT INTO comment(board_id,content, writer)
+VALUES('1','1','admin');
  
- select *from tb_board;
- 
- drop table member;
 
- drop table tb_board;
+		SELECT  comment_id AS commentId 
+			   , board_id AS boardnum
+			   , content
+			   , writer as commentWriter
+			   , regdate
+		FROM comment
+		WHERE comment_id = 2
+	
+ 
+ 
+ drop table comment;
+ 
+ 
+SELECT *
+FROM comment c, tb_board2 b
+WHERE c.board_id = b.board_id AND c.num = b.num AND b.board_id = 1
+ 
+ 
+SELECT MEMID,MEMPW,MEMNAME FROM MEMBER JOIN BOARD ON MEMBER.num = BOARD.num
+

@@ -22,15 +22,28 @@
 				password : password
 			},
 			success : function(response) {
-				if (response == "false")
+				if (response == "false"){
 					alert('잘못된 아이디이거나, 비밀번호가 틀렸습니다.');
-				//질문: 틀려도 홈으로 돌아갑니다요..
-				else
+				    //질문: 틀려도 홈으로 돌아갑니다요..	
+				} else{
 					alert('로그인에 성공하였습니다.');
-					location.href = "home.do"; //로그인하면 home.do로 돌아가시면 됩니다.
+					location.href = "home.do"; //로그인하면 home.do로 돌아가시면 됩니다.	
+				}
 			}
 		});
 	}
+	
+	/* $(document).ready(()=>{
+		// $(document).ready 문서가 준비되면 매개변수로 넣은 콜백 함수를 실행하라는 의미입니다.
+		// $(function(){}); 같은 의미이다.
+		// modify를 누르면 일단 게시물 id(idx)를 받아와야한다. 2.modify.do로 보내버린다. 3.게시판 id를 가지고 가야한다.
+		
+		location.href="<c:url value='/boardModify.do'/>?bno=${boardInfo.boardnum}";//get 방식
+		
+		
+		alert("${msg}")
+  		}); */
+	
 </script>
 </head>
 <body>

@@ -17,7 +17,12 @@
 	  src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	
 <script type="text/javascript">
-	function modifyCheck() {
+
+		
+		$(document).ready(()=>{
+			
+			$("#modify").click(()=>{
+			
 		var id = $('#id').val();//value 약자
 		var name = $('#name').val();
 		var age = $('#age').val();
@@ -45,7 +50,9 @@
 				    //upgrade 고정된 회원정보를 볼 수 있게 할 수 있나?
 			}
 		});
-	}
+			});
+		});
+	
 </script>
 </head>
 <body>
@@ -75,7 +82,7 @@
 						<label>phone</label> <input type="phone" class="form-control"
 							id="phone" value="${memberInfo.phone}">
 					</div>
-					<button type="submit" class="btn btn-primary" onclick="modifyCheck()">회원 수정</button>
+					<button type="submit" class="btn btn-primary" id="modify">회원 수정</button>
 					<button id="remove" type="button" class="btn btn-danger">회원 삭제</button>
 			       </div>
 			<div class="pannel-footer">근주</div>

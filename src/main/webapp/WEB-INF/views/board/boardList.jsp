@@ -34,27 +34,26 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>게시물 번호</th>
         <th>제목</th>
         <th>조회수</th>
-        <th>등록자</th>
+        <th>작성자</th>
         <th>등록일</th>
       </tr>
     </thead>
     <tbody>
     <c:forEach var="bvo" items="${boardList}">
       <tr>
-        <td>${bvo.boardnum}</td>
         <td><a href="<c:url value='/boardContents.do?bno=${bvo.boardnum}'/>" >${bvo.title}</a></td><!--상세보기 요청 -->
         <td>${bvo.count}</td>
         <td>${bvo.writer}</td>
-        <td><fmt:formatDate pattern="yyyy-mm-dd" value="${bvo.regdate}"/></td>
+        <td><fmt:formatDate pattern="yyyy-MM-dd" value="${bvo.regdate}"/></td>
       </tr>
       </c:forEach>
     </tbody>
   </table>
   </div>
-</div>
+  <button type="button" onclick="location.href='/registerBoard.do';">게시물 등록 </button>
+ </div>
     <div class="panel-footer">화이팅!!</div>
   </div>
 </div>

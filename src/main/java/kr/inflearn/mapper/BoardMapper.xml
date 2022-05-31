@@ -2,27 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.inflearn.mapper.BoardMapper">
 
-	<!-- 게시판 리스트 불러오기 -->
-	<!-- as를 이렇게 사용하는게 맞나? -->
+	<!-- 게시판 리스트 불러오기 운영 -->
+	<!-- as를 이렇게 사용하는게 맞나? 개발서버-->
 	<select id="readboardList" resultType="boardVO">
-		select board_id AS
-		boardnum,writer,title,contents,count,regdate
-		from tb_board2
+		SELECT 
+			b.board_id AS boardnum,
+			m.id as writer,
+			b.title,
+			b.contents,
+			b.count,
+			b.regdate
+		FROM   tb_board2 b,
+		       member m
+		where b.num = m.num
+		     
 	</select>
 
 	<!-- 게시판 올리기 (insert) -->
 	<insert id="insertBoard" parameterType="boardVO">
 		INSERT INTO
-		tb_board2(title, contents, count, writer)
-		VALUES(#{title},#{contents},#{count},#{writer})
+		tb_board2(title, contents, count, num)
+		VALUES(#{title},#{contents},#{count},#{num})
 	</insert>
 
 	<!-- 게시물 상세보기 (read) -->
 	<select id="readBoardContents" parameterType="Integer"
 		resultType="boardVO">
-		SELECT board_id AS boardnum,writer,title,contents,count
-		FROM tb_board2
-		WHERE board_id = #{boardnum}
+		SELECT b.board_id AS boardnum,m.num as num, m.id as writer,b.title,b.contents,b.count
+		FROM tb_board2 b, member m
+		WHERE b.board_id = #{boardnum} and b.num = m.num
 	</select>
 
 
@@ -31,4 +39,56 @@
 		update tb_board2 set title=#{title}, contents=#{contents}
 		where board_id = #{boardnum}
 	</update>
+	
+	<!-- 게시글 작성자 정보 불러오기 -->
+	<select id="readMemberInfo" parameterType="Integer" resultType="memberVO">
+	SELECT m.id as id
+	      , m.name as name
+	FROM tb_board2 b, member m
+	WHERE b.num = m.num AND  b.board_id = #{boardnum}
+	</select>
+	
+	<!-- 댓글 등록하기 -->
+	<insert id="insertComment" parameterType="commentVO">
+	    INSERT INTO
+        comment(board_id, content, num)
+	    VALUES(#{boardnum},#{content},#{num})
+	</insert>
+	
+	<!-- 댓글  목록 불러오기 -->
+	<select id="readCommentList" parameterType="Integer" resultType="commentVO">
+		SELECT comment_id AS commentId
+		     , board_id as boardnum
+		     , content
+		     , m.id as commentWriter
+		     , regdate 
+        FROM comment c, member m
+        WHERE board_id = #{boardnum} AND c.num = m.num
+	</select>
+	
+	<!-- 댓글 하나 불러오기 -->
+	<select id= "readComment" parameterType="Integer" resultType="commentVO">
+		SELECT  comment_id AS commentId 
+			   , board_id AS boardnum
+			   , content
+			   , m.id as commentWriter
+			   , m.num as num
+			   , regdate
+		FROM comment c, member m 
+		WHERE comment_id = #{commentId} AND c.num = m.num
+	
+	</select>
+	
+	<!-- 댓글 수정하기 -->
+	<update id="updateComment" parameterType="commentVO" >
+        UPDATE comment set content=#{content}
+		where comment_id=#{commentId}
+	</update>
+	
+	<!-- 게시글 글쓴이 댓글 찾기 -->
+	<select id="readBoardWriterComment" parameterType="Integer" resultType="commentVO">
+		SELECT *
+		FROM comment c, tb_board2 b
+		WHERE c.board_id = b.board_id AND c.num = b.num AND b.board_id = #{boardnum}
+	</select>
 </mapper>

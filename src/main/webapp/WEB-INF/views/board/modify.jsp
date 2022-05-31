@@ -28,35 +28,50 @@
     	  
       });
       
-      function modify(){
+  	$(document).ready(()=>{
   		
-    	alert("확인");
-    	var boardnum = $('#boardnum').val();
-		var title = $('#title').val();
-    	var contents = $('#contents').val();
-		var writer = $('#writer').val();
-		
-		$.ajax({
-			type : "POST",
-			url : 'boardModify.do',
-			data : {
-				boardnum : boardnum,
-				title : title,
-				contents : contents,
-				writer : writer
-			},
-			success : function(response) {
-				if (response == "false")
-					alert("게시물 수정 실패하였습니다."); //'', "" 를 써도 무관하다.
-				else
-					alert("게시물 수정 성공하였습니다.");
-					location.href="/readBoardList.do"
-			      //"<c:url value='/readBoardList.do'/>" 차이점은 무엇인가 없다면 왜 c태그를 사용하나?
-				  //가입 성공하면 로그인을 하여라.
-			}
+  		$("#modify").click(()=>{
+  			alert("확인");
+  	    	var boardnum = $('#boardnum').val();
+  			var title = $('#title').val();
+  	    	var contents = $('#contents').val();
+  			var num = $('#num').val();
+  			
+  			$.ajax({
+  				type : "POST",
+  				url : 'boardModify.do',
+  				data : {
+  					boardnum : boardnum,
+  					title : title,
+  					contents : contents,
+  					num : num
+  				},
+  				success : function(response) {
+  					if (response == "success"){
+  						alert("게시물 수정 성공하였습니다.");
+  						location.href="/readBoardList.do"
+  						
+  						//질문-Ajax에서도 Redirect가 가능한가?
+
+  					}//'', "" 를 써도 무관하다.
+  					else {
+  						if(response != ''){
+  							alert(response)
+  						}else{
+  							alert("게시물 수정 실패하였습니다.");						
+  						}
+
+  						//location.href="/readBoardList.do"
+  						location.href="<c:url value='/boardContents.do'/>?bno=${boardInfo.boardnum}";
+  					}
+  						
+  				      //"<c:url value='/readBoardList.do'/>" 차이점은 무엇인가 없다면 왜 c태그를 사용하나?
+  					  //가입 성공하면 로그인을 하여라.
+  				}
+  			});
 		});
-    	  
-      }
+	  
+  	});
   
   </script>
 </head>
@@ -81,9 +96,10 @@
   </div>
   <div class="form-group">
     <label>writer</label>
-    <input type="text" class="form-control" name="writer" value="${boardInfo.writer}" readonly="readonly">
+    <input type="hidden" class="form-control" id="num" name="num" value="${boardInfo.num}" readonly="readonly">
+    <input type="text" class="form-control" value="${boardInfo.writer}" readonly="readonly"> 
   </div>
-  <button type="submit" class="btn btn-primary" onclick="modify()">수정</button>
+  <button type="submit" class="btn btn-primary" id="modify">수정</button>
   <button id="remove" type="button" class="btn btn-danger">삭제</button>
   <button id="list" type="button" class="btn btn-info">리스트</button>
     </div>

@@ -17,6 +17,8 @@
 	   		<h4><a href="<c:url value='/readMember.do'/>">${name} </a></h4>환영합니다!
 	    <a href="<c:url value='/logout.do'/>">로그아웃</a>   
 		</c:if>
+		<br></br>
+	   <a href="<c:url value='/readBoardList.do'/>">게시판 가기</a> 
 	</ul>
 
 

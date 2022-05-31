@@ -17,7 +17,7 @@ function registerBoard(){
 	alert('확인');
 	var title = $('#title').val();
     var contents = $('#contents').val();
-    var writer= $('#writer').val();
+    var num= $('#num').val();
     
     $.ajax({
 		type : "POST",
@@ -25,15 +25,16 @@ function registerBoard(){
 		data : {
 			title : title,
 			contents : contents,
-			writer : writer
+			num : num
 		},
 		success : function(response) {
-			if (response == "false")
+			if (response == "false"){
 				alert("게시물 등록 실패.");
-			
-			else
+			}
+			else{
 				alert("게시물 등록 성공.");
 			 location.href = "readBoardList.do"; //
+			}
 		}
 	});
 x
@@ -60,9 +61,12 @@ x
   </div>
   <div class="form-group">
     <label>writer</label>
-    <input type="text" class="form-control" id="writer">
+    <input type="hidden" class="form-control" id="num" readonly="readonly">
+    <input type="text" class="form-control" value="${memberId}" readonly="readonly">
   </div>
+  <c:if test="${sessionScope.memberNum!= null && sessionScope.memberNum!= ''}">
   <button type="submit" class="btn btn-default" onclick="registerBoard()">등록</button>
+  </c:if>
   <button type="reset" class="btn btn-default">취소</button>
     </div>
   <div class="pannel-footer">인프런 화이팅!</div>

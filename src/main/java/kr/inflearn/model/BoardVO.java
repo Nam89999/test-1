@@ -12,13 +12,13 @@ public class BoardVO {
 	
 	//Field
 	private int boardnum;
-	private String writer;
+	private int num; // 외부키
 	private String title;
 	private String contents;
 	private int count;
 	private Date regdate;
 	private Date updatedate;
-	
+	private String writer;
 	
 	//Getter Setter
 	public int getBoardnum() {
@@ -27,11 +27,11 @@ public class BoardVO {
 	public void setBoardnum(int boardnum) {
 		this.boardnum = boardnum;
 	}
-	public String getWriter() {
-		return writer;
+	public int getNum() {
+		return num;
 	}
-	public void setWriter(String writer) {
-		this.writer = writer;
+	public void setNum(int num) {
+		this.num = num;
 	}
 	public String getTitle() {
 		return title;
@@ -63,33 +63,41 @@ public class BoardVO {
 	public void setUpdatedate(Date updatedate) {
 		this.updatedate = updatedate;
 	}
+	public String getWriter() {
+		return writer;
+	}
+	public void setWriter(String writer) {
+		this.writer = writer;
+	}
 	
 	 
 	//Default Constructor
-	public BoardVO() {
-		super();
-	}
+	public BoardVO(){}
 	
 	//Constructor
-	public BoardVO(int boardnum, String writer, String title, String contents, int count, Date regdate,
-			Date updatedate) {
-		super();
+	public BoardVO(int boardnum, int num, String title, String contents, int count, Date regdate,
+			Date updatedate, String writer) {
+		
 		this.boardnum = boardnum;
-		this.writer = writer;
+		this.num = num;
 		this.title = title;
 		this.contents = contents;
 		this.count = count;
 		this.regdate = regdate;
 		this.updatedate = updatedate;
+		this.writer = writer;
+
 	}
+
 	
-	
+
 	@Override
 	public String toString() {
-		return "BoardVO [boardnum=" + boardnum + ", writer=" + writer + ", title=" + title + ", contents=" + contents
-				+ ", count=" + count + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+		return "BoardVO [boardnum=" + boardnum + ", num=" + num + ", title=" + title + ", contents=" + contents
+				+ ", count=" + count + ", regdate=" + regdate + ", updatedate=" + updatedate + ", writer=" + writer
+				+ "]";
 	}
-	
+
 	
 	 
 }
