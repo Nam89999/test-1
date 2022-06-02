@@ -7,5 +7,6 @@
 		<typeAlias type="kr.inflearn.model.BoardVO" alias="boardVO" />
 		<typeAlias type="kr.inflearn.member.model.MemberVO" alias="memberVO" />
 		<typeAlias type="kr.inflearn.comment.model.CommentVO" alias="commentVO" />
+	    <typeAlias type="kr.inflearn.comment.model.ReCommentVO" alias="reCommentVO" />		
 	</typeAliases>
 </configuration>

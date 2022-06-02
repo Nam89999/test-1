@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.inflearn.comment.mapper.CommentMapper">
+
+
+	<!-- 댓글  목록 불러오기 -->
+	<select id="readCommentList" parameterType="Integer" resultType="commentVO">
+		SELECT comment_id AS commentId
+		     , board_id as boardnum
+		     , content
+		     , m.id as commentWriter
+		     , regdate 
+        FROM comment c, member m
+        WHERE board_id = #{boardnum} AND c.num = m.num
+	</select>
+
+	<!-- 대댓글 목록 Read -->
+	<select id="readCommentList" parameterType="Integer" resultType="reCommentVO">
+		SELECT re_comment_id AS reCommentId
+			,comment_id AS commentId
+			,m.id AS commentWriter
+			,content
+			,regdate
+		FROM re_comment r, member m
+		where r.num = m.num AND comment_id = #{commentId}    
+	</select>
+	
+	
+	
+
+
+</mapper>

@@ -73,18 +73,15 @@ WHERE tb.board_id = 1 AND b.num=m.num;
  );
  
 SELECT* FROM comment;
- 
-INSERT INTO comment(board_id,content, writer)
-VALUES('1','1','admin');
- 
 
-		SELECT  comment_id AS commentId 
-			   , board_id AS boardnum
-			   , content
-			   , writer as commentWriter
-			   , regdate
-		FROM comment
-		WHERE comment_id = 2
+
+SELECT  comment_id AS commentId 
+	   , board_id AS boardnum
+       , content
+	   , writer as commentWriter
+	   , regdate
+FROM comment
+WHERE comment_id = 2
 	
  
  
@@ -96,5 +93,25 @@ FROM comment c, tb_board2 b
 WHERE c.board_id = b.board_id AND c.num = b.num AND b.board_id = 1
  
  
-SELECT MEMID,MEMPW,MEMNAME FROM MEMBER JOIN BOARD ON MEMBER.num = BOARD.num
+create table re_comment(
+ 	
+		 re_comment_id int not null auto_increment,
+		 comment_id int not null,
+		 board_id int not null,
+		 num int not null,
+         content varchar(150) not null,
+         regdate datetime not null default current_timestamp,
+	     primary key(re_comment_id)
 
+ );
+
+SELECT re_comment_id AS reCommentId
+	   ,comment_id AS commentId
+	   ,m.id AS commentWriter
+	   ,content
+	   ,regdate
+FROM re_comment r, member m
+where r.num = m.num AND comment_id = 1;  
+		
+INSERT INTO comment(re_comment_id,content, writer)
+VALUES('1','1','admin');
