@@ -119,7 +119,7 @@
 				<c:forEach var="comment" items="${commentList}">
 					<tr>
 						<td>${comment.commentId}</td>
-						<c:if test="${goModify1!= null && goModify1!= ''}">
+						<c:if test="${comment.boardWriter}">
 						<td>글쓴이</td>
 						</c:if>
 						<td>${comment.commentWriter}</td>
