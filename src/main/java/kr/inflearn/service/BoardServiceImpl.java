@@ -85,10 +85,10 @@ public class BoardServiceImpl implements BoardService {
     // 댓글 등록하기
     @Override
     public String insertComment(CommentVO commentVO) {
-
+    	
         // mapper 댓글 등록 함수 호출
         int result = boardMapper.insertComment(commentVO);
-        System.out.println(result);
+       //확인 System.out.println(result);
 
         // 댓글 등록 성공하면
         if (result > 0) {
@@ -107,25 +107,48 @@ public class BoardServiceImpl implements BoardService {
     @Override
     public List<CommentVO> readCommentList(int boardnum) {
 
-        List<CommentVO> commentList = boardMapper.readCommentList(boardnum);
-
+        //댓글 목록 비스 호출
+    	List<CommentVO> commentList = boardMapper.readCommentList(boardnum);
+        
+        //board 정보 불러온 후 
+        //board 글쓴이 불러오기 
         BoardVO boardInfo = boardMapper.readBoardContents(boardnum);
-
         int boardWriter = boardInfo.getNum();
-
+        System.out.println("게시물 작성자 번호:"+boardWriter);
+        
+        //게시글 작성자 댓글에는 흔적 남기기
+        //for 문으로  댓글 목록을 돌리고 
         for (int i = 0; i < commentList.size(); i++) {
-            CommentVO list = commentList.get(i);
-
+            // 댓글 목록 각각의 정보 호출
+        	CommentVO list = commentList.get(i);
+        	
+        	// 댓글 목록 각각의 작성자 확인
+        	for (int u = 0; u < commentList.size(); u++) {
+        		
+        		int cwriter=list.getNum();
+        		
+        		System.out.println("댓글 작성자 번호:"+cwriter);
+        	 };
+        	 
+        	// 각각의 comment 작성자 정보를 담아준다. 
             int commentWriter = list.getNum();
-            commentList.get(i).setBoardWriter(false);
-
-            if (boardWriter == commentWriter) { // 댓글 작성자와 본문 작성자가 같다면
-                commentList.get(i).setBoardWriter(true);
+            
+            // 그리고 객체(VO)에 BoardWriter에 false를 넣어준다.
+            commentList.get(i).setIsBoardWriter(false);
+            
+            // 만약 board 글쓴이와 comment 글쓴이가 같다면  
+            if (boardWriter == commentWriter) {
+            	
+            	// 그리고 객체(VO)에 BoardWriter에 true를 넣어준다.
+                commentList.get(i).setIsBoardWriter(true);
             }
         }
-
+        // 가공 된 commentList를 넘긴다.
         return commentList;
     }
+
+    
+    
 
     // 댓글 하나 불러오기
     @Override
@@ -177,5 +200,11 @@ public class BoardServiceImpl implements BoardService {
         }
 
     }
+    
+    
+    
+    
+
+    
 
 }

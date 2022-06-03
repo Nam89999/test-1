@@ -59,6 +59,7 @@
 	<select id="readCommentList" parameterType="Integer" resultType="commentVO">
 		SELECT comment_id AS commentId
 		     , board_id as boardnum
+		     , m.num as num
 		     , content
 		     , m.id as commentWriter
 		     , regdate 

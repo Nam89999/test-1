@@ -119,10 +119,12 @@
 				<c:forEach var="comment" items="${commentList}">
 					<tr>
 						<td>${comment.commentId}</td>
-						<c:if test="${comment.boardWriter}">
-						<td>글쓴이</td>
+						<c:if test="${comment.isBoardWriter}">
+						<td><span style="color:blue"><b>글쓴이</b></span></td>
 						</c:if>
+						<c:if test="${comment.isBoardWriter==false}">
 						<td>${comment.commentWriter}</td>
+						</c:if>
 						<td><a
 							href="${ctx}/modifyComment.do?cno=${comment.commentId}">${comment.content}</a></td>
 						<td><fmt:formatDate pattern="yyyy-MM-dd"

@@ -66,10 +66,6 @@ public class BoardController {
 		try {
 			int memberNum = (int) session.getAttribute("memberNum");// 세션에 memberNum없으면 오류가 날 수 있어서 try catch
 
-			/*
-			 * if (session.getAttribute("memberNum") == null) { // 질문-세션에 정보가 담아있지 않다면 게시글
-			 * 목록페이지로 이동 의미가 없는거 같기도하다? return "redirect:/readBoardList.do"; }
-			 */
 			// 추가
 			String memberId = (String) memberService.memberContent(memberNum).getId();
 			model.addAttribute("memberId", memberId);
@@ -112,72 +108,89 @@ public class BoardController {
 
 	}
 
-	// 게시물 상세보기 +수정 버튼은 글쓴이만 보이게
-	@RequestMapping(value = "/boardContents.do", method = RequestMethod.GET)
-	public String boardContents(@RequestParam("bno") int boardnum, Model model, HttpSession session) {
+	// 게시물 상세보기 + 댓글 목록 보기 수정 버튼은 글쓴이만 보이게
+		@RequestMapping(value = "/boardContents.do", method = RequestMethod.GET)
+		public String boardContents(@RequestParam("bno") int boardnum, Model model, HttpSession session) {
 
-		try {
-			// 세션에서 유저 번호 꺼내고,
-			int memberNum = (int) session.getAttribute("memberNum");
-			// 서비스 호출 (게시판 번호로 게시물 불러오기)
-			BoardVO boardVO = boardService.getBoard(boardnum);
+			try {
+				// 세션에서 유저 번호 꺼내고,
+				int memberNum = (int) session.getAttribute("memberNum");
+				// 서비스 호출 (게시판 번호로 게시물 불러오기)
+				BoardVO boardVO = boardService.getBoard(boardnum);
 
-			// 객체 바인딩
-			model.addAttribute("boardInfo", boardVO);
+				// 객체 바인딩
+				model.addAttribute("boardInfo", boardVO);
 
-			// boardVO의 작성자 번호랑 세션에 있는 작성자 번호랑 같은지 체크
-			// 같으면 뭔가 변수를 넘겨서 view에서 수정 버튼이 보일 수 있도록
-			if (boardVO.getNum() == memberNum) {
-				model.addAttribute("goModify", boardVO);
+				// boardVO의 작성자 번호랑 세션에 있는 작성자 번호랑 같은지 체크
+				// 같으면 뭔가 변수를 넘겨서 view에서 수정 버튼이 보일 수 있도록
+				if (boardVO.getNum() == memberNum) {
+					model.addAttribute("goModify", boardVO);
+
+				}
+
+				// 댓글 : 로그인 한 사람 이름 불러오기
+				MemberVO memberInfo = memberService.memberContent(memberNum);
+				model.addAttribute("memberInfo", memberInfo.getId());
+
+				// 댓글 리스트 불러오기
+				List<CommentVO> commentList = boardService.readCommentList(boardnum);
+//				
+//			    BoardVO boardInfo = boardService.getBoard(boardnum);
+//			    int boardWriter = boardInfo.getNum();
+//			    
+//			    //for 문으로  댓글 목록을 돌리고 
+//		        for (int i = 0; i < commentList.size(); i++) {
+//		            // 댓글 목록 각각의 정보 호출
+//		        	CommentVO list = commentList.get(i);
+//		        	// 각각의 comment 작성자 정보를 담아준다. 
+//		            int commentWriter = list.getNum();
+//		            // 그리고 객체(VO)에 BoardWriter에 false를 넣어준다.
+//		            commentList.get(i).setIsBoardWriter(false);
+//		            // if (board 글쓴이 번호 == comment 작성자) 라면  
+//		            if (boardWriter == commentWriter) {
+//		            	// 그리고 객체(VO)에 BoardWriter에 true를 넣어준다.
+//		                commentList.get(i).setIsBoardWriter(true);
+//		            }
+//		        }
+		        
+		    	model.addAttribute("commentList", commentList);
+			        
+				
+				for(int i = 0; i < commentList.size(); i++) {
+				System.out.println("댓글 출력:"+commentList.get(i));
+				}
+
+				return "board/get";
+
+			} catch (Exception e) {// 로그인 하지 않은 사용자
+
+				// 서비스 호출
+				BoardVO boardVO = boardService.getBoard(boardnum);
+				// 객체 바인딩
+				model.addAttribute("boardInfo", boardVO);
+
+				// 댓글 리스트 불러오기
+				List<CommentVO> commentList = boardService.readCommentList(boardnum);
+				
+				
+				model.addAttribute("commentList", commentList);
+				
+				for(int i = 0; i < commentList.size(); i++) {
+					System.out.println("댓글 출력:"+commentList.get(i));
+					}
+
+				return "board/get";
 
 			}
-
-			// 댓글 : 로그인 한 사람 이름 불러오기
-			MemberVO memberInfo = memberService.memberContent(memberNum);
-			model.addAttribute("memberInfo", memberInfo.getId());
-
-			// 댓글 리스트 불러오기
-			List<CommentVO> commentList = boardService.readCommentList(boardnum);
-			
-			int boardWriter = boardVO.getNum();
-			
-			for(int i=0; i < commentList.size(); i++) {
-				 
-				  CommentVO list = commentList.get(i);
-				
-				  int commentWriter =list.getNum();
-				
-				  if(boardWriter == commentWriter) { // 댓글 작성자와 본문 작성자가 같다면  
-					  
-					  model.addAttribute("goModify1", list);
-				   
-				   }else{ // 틀리다면 
-					   
-					   
-					   model.addAttribute("goModify2", list);
-				   }
-				
-			}
-			model.addAttribute("commentList", commentList);
-
-			return "board/get";
-
-		} catch (Exception e) {// 로그인 하지 않은 사용자
-
-			// 서비스 호출
-			BoardVO boardVO = boardService.getBoard(boardnum);
-			// 객체 바인딩
-			model.addAttribute("boardInfo", boardVO);
-
-			// 댓글 리스트 불러오기
-			List<CommentVO> commentList = boardService.readCommentList(boardnum);
-			model.addAttribute("commentList", commentList);
-
-			return "board/get";
 
 		}
+		
+		
+		
+		
 
-	}
+
+		
 
 	// 게시물 수정 페이지 이동+ 들어오지 못하게
 	@RequestMapping(value = "/boardModify.do", method = RequestMethod.GET)
@@ -236,8 +249,7 @@ public class BoardController {
 			// 로그인한 사용자의 memberID를 세션에서 뺴어 바구니에 넣어준다.(확인 필요)
 			commentVO.setNum(memberNum);
 
-			// 확인
-			System.out.println("comment-register controller: " + commentVO);
+			// 확인 System.out.println("comment-register controller: " + commentVO);
 
 			// 댓글 등록 서비스 호출
 			String result = boardService.insertComment(commentVO);
@@ -251,8 +263,9 @@ public class BoardController {
 		}
 
 	}
-
-	// 댓글 수정 이동
+	
+	
+	// 댓글 수정 GET
 	@RequestMapping(value = "/modifyComment.do", method = RequestMethod.GET)
 	public String modifyCommentGET(@RequestParam("cno") int commentId, HttpSession session, Model model) {
 
@@ -261,11 +274,12 @@ public class BoardController {
 			int memberNum = (int) session.getAttribute("memberNum");
 
 			System.out.println("댓글번호" + commentId);
+			
 
 			// 수정 할 댓글 내용 불러오기
-			CommentVO comment = boardService.readComment(commentId);
+			CommentVO comment = boardService.readComment(commentId);			
 
-			System.out.println(comment);
+			//확인 System.out.println(comment);
 
 			// 로그인 한 사용자 번호와 댓글 작성자의 번호가 같은지 확인 후
 			// 같으면 뭔가 변수를 넘겨서 view에서 수정 버튼이 보일 수 있도록
@@ -276,13 +290,20 @@ public class BoardController {
 
 			// 객체 바인딩
 			model.addAttribute("comment", comment);
+			// 게시글 번호 바인
 
 			return "board/commentModify";
 		} catch (Exception e) {
 			return "member/memberLogin";
 		}
 	}
+	
+	
+	
 
+		
+	
+	//댓글 수정 POST
 	@RequestMapping(value = "/modifyComment.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String modifyCommentPost(CommentVO commentVO, HttpSession session) {
@@ -310,5 +331,8 @@ public class BoardController {
 		}
 
 	}
-
+	
+	
+	
+	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 
 import kr.inflearn.comment.model.ReCommentVO;
 import kr.inflearn.comment.service.CommentService;
@@ -21,11 +22,13 @@ public class CommentController {
 	
 	//대댓글 목록 
 	//댓글 번호를 넘기면 대댓글 list를 보여준다.
-    public String reCommentList(int commentId){
+    public String reCommentList(int commentId, Model model){
     	
     	//서비스 호출
     	List<ReCommentVO> reCommentList=commentService.reCommentList(commentId);
     	
+    	
+    	model.addAttribute("reCommentList",reCommentList);
     	
     	return "board/get";
     	

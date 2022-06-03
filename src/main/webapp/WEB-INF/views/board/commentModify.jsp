@@ -31,7 +31,8 @@
   					if (response == "success"){
   						alert("댓글 수정 성공");  						
   						//질문-Ajax에서도 Redirect가 가능한가? 이걸로 했다 됐다고 봐야한다.
-  						window.location.replace("<c:url value='/boardContents.do'/>?bno=${boardInfo.boardnum}");
+  						window.location.replace("<c:url value='/boardContents.do'/>?bno=${comment.boardnum}");
+  						
   					}//'', "" 를 써도 무관하다.
   					else {
   						if(response != ''){

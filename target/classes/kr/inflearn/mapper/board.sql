@@ -107,11 +107,13 @@ create table re_comment(
 
 SELECT re_comment_id AS reCommentId
 	   ,comment_id AS commentId
+ 	   ,board_id AS boardnum
+	   ,m.num as num
 	   ,m.id AS commentWriter
 	   ,content
 	   ,regdate
 FROM re_comment r, member m
 where r.num = m.num AND comment_id = 1;  
 		
-INSERT INTO comment(re_comment_id,content, writer)
-VALUES('1','1','admin');
+INSERT INTO re_comment(comment_id,board_id, num,content)
+VALUES('1','1','2','테스트 대댓글');

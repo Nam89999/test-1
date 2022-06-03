@@ -61,31 +61,43 @@ public class CommentVO {
         this.regdate = regdate;
     }
 
-    public boolean isBoardWriter() {
+    public boolean getIsBoardWriter() {
         return isBoardWriter;
     }
-
-    public void setBoardWriter(boolean boardWriter) {
-        isBoardWriter = boardWriter;
+    // 이건 뭐지? 왜이렇게 했나?
+    public void setIsBoardWriter(boolean isBoardWriter) {
+       this.isBoardWriter = isBoardWriter;
     }
-
-    @Override
-    public String toString() {
-        return "CommentVO [commentId=" + commentId + ", boardnum=" + boardnum + ", num=" + num + ", content=" + content
-                + ", commentWriter=" + commentWriter + ", regdate=" + regdate + "]";
+    
+    /*public void setBoardWriter(boolean boardWriter) {
+       isBoardWriter = BoardWriter;
     }
+     * 
+     * */
 
-    public CommentVO(int commentId, int boardnum, int num, String content, String commentWriter, Date regdate) {
+
+
+    public CommentVO(int commentId, int boardnum, int num, String content, String commentWriter, Date regdate,
+    		boolean isBoardWriter) {
         this.commentId = commentId;
         this.boardnum = boardnum;
         this.num = num;
         this.content = content;
         this.commentWriter = commentWriter;
         this.regdate = regdate;
+        this.isBoardWriter = isBoardWriter;
+
 
     }
 
-    public CommentVO() {
+    @Override
+	public String toString() {
+		return "CommentVO [commentId=" + commentId + ", boardnum=" + boardnum + ", num=" + num + ", content=" + content
+				+ ", commentWriter=" + commentWriter + ", regdate=" + regdate + ", isBoardWriter=" + isBoardWriter
+				+ "]";
+	}
+
+	public CommentVO() {
         // TODO Auto-generated constructor stub
     }
 
