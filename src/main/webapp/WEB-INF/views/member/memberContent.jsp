@@ -19,6 +19,14 @@
 		$("#modify").click(()=>{
 			location.href="<c:url value='/memberModify.do'/>";
 		});
+		
+		//"<c:url value='/boardModify.do'/>?bno=${boardInfo.boardnum}"
+				
+		$("#notebox").click(()=>{
+			location.href="<c:url value='/notebox.do'/>";
+		});
+		
+		
   		});
   </script>
     		<!--?num 이것은 무엇을 기준으로 적어주는가? DBorVO-->
@@ -51,7 +59,8 @@
   </div>
   <button id="modify" class="btn btn-default">회원 수정</button>
   <button id="list" class="btn btn-info">비밀번호 수정</button>
-    </div>
+  <button id="notebox" class="btn btn-info">쪽지함</button>
+    </div>    
     <div class="pane-footer">제발!</div>
   </div>
 </div>

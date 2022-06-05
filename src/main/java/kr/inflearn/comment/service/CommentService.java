@@ -9,10 +9,11 @@ public interface CommentService {
 	
 	//대댓글 리스트 불러오기
 	public List<ReCommentVO> reCommentList(int commentId);
+
+	public List<CommentVO> reCommentList2(int commentId);
 	
 	//대댓글 등록하기 
 	public String registerReComment(ReCommentVO reCommentVO);
 	
 	//대댓글 수정하기 
-
 }

@@ -1,4 +1,4 @@
-package kr.inflearn.mapper;
+package kr.inflearn.comment.mapper;
 
 import java.util.List;
 

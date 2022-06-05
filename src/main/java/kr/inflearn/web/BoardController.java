@@ -87,10 +87,15 @@ public class BoardController {
 
 		try {
 
+			System.out.println("게시물 등록 정보:"+boardVO);
+			
 			int memberNum = (int) session.getAttribute("memberNum");
+			
+			System.out.println("게시물 작성자:"+memberNum);
 
 			// 서비스 호출
 			int result = boardService.registerBoard(boardVO);
+	
 
 			if (result > 0) {// 게시물 등록 성공시
 

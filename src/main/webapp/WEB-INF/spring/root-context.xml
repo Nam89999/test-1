@@ -29,6 +29,8 @@
 	
 	<mybatis-spring:scan base-package="kr.inflearn.mapper"/> 
 	<mybatis-spring:scan base-package="kr.inflearn.member.mapper"/> 
+	<mybatis-spring:scan base-package="kr.inflearn.comment.mapper"/> 
+	<mybatis-spring:scan base-package="kr.inflearn.note.mapper"/> 
 	<context:component-scan base-package="kr.inflearn.service" />
     <context:component-scan base-package="kr.inflearn.member.service" />
 	

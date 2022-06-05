@@ -1,6 +1,7 @@
 package kr.inflearn.comment.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class CommentVO {
 
@@ -10,7 +11,8 @@ public class CommentVO {
     private String content;
     private String commentWriter;
     private Date regdate;
-    private boolean isBoardWriter;
+    private boolean isBoardWriter; //글쓴이 댓글 분류를 위해 추가
+    private List<ReCommentVO> recommentList; //대댓글 목록 불러오기를 위해 추가 
 
 
     public int getNum() {
@@ -74,6 +76,8 @@ public class CommentVO {
     }
      * 
      * */
+    
+    
 
 
 
@@ -90,7 +94,15 @@ public class CommentVO {
 
     }
 
-    @Override
+    public List<ReCommentVO> getRecommentList() {
+		return recommentList;
+	}
+
+	public void setRecommentList(List<ReCommentVO> recommentList) {
+		this.recommentList = recommentList;
+	}
+
+	@Override
 	public String toString() {
 		return "CommentVO [commentId=" + commentId + ", boardnum=" + boardnum + ", num=" + num + ", content=" + content
 				+ ", commentWriter=" + commentWriter + ", regdate=" + regdate + ", isBoardWriter=" + isBoardWriter

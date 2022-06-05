@@ -117,3 +117,39 @@ where r.num = m.num AND comment_id = 1;
 		
 INSERT INTO re_comment(comment_id,board_id, num,content)
 VALUES('1','1','2','테스트 대댓글');
+
+
+create table notebox(
+ 	
+		 note_id int not null auto_increment,
+		 sender_id int not null,
+		 recipient_id int not null,
+		 title varchar(100) not null,
+         content varchar(200) not null,
+         regdate datetime not null default current_timestamp,
+	     primary key(note_id)
+
+ );
+ 
+ SELECT *
+ FROM notebox
+ 
+INSERT INTO notebox(sender_id,recipient_id,title, content)
+VALUES('1','2','안녕하세요.신입사원 남진구 입니다.','하이하이 테스트 쪽지');
+
+INSERT INTO notebox(sender_id,recipient_id,title, content)
+VALUES('3','2','맘맘님, 잘지내시죠?','테스트 쪽지2');
+
+INSERT INTO notebox(sender_id,recipient_id,title, content)
+VALUES('3','2','맘맘님, 잘지내시죠?','테스트 쪽지2');
+
+INSERT INTO notebox(sender_id,recipient_id,title, content)
+VALUES('3','1','관리자님, 잘지내시쥬?','테스트 쪽지3');
+
+DROP table notebox;
+
+
+SELECT *
+FROM notebox n, member m
+WHERE n.recipient_id = m.num AND n.recipient_id = 2;
+

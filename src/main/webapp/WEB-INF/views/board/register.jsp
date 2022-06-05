@@ -33,14 +33,17 @@ function registerBoard(){
 			}
 			else{
 				alert("게시물 등록 성공.");
-			 location.href = "readBoardList.do"; //
+			 location.href = "readBoardList.do"; 
 			}
 		}
 	});
-x
+
 	
 	
 }
+
+
+
 
 </script>
 </head>
@@ -64,8 +67,9 @@ x
     <input type="hidden" class="form-control" id="num" readonly="readonly">
     <input type="text" class="form-control" value="${memberId}" readonly="readonly">
   </div>
+    <button type="submit" class="btn btn-default" onclick="registerBoard()">등록</button>
   <c:if test="${sessionScope.memberNum!= null && sessionScope.memberNum!= ''}">
-  <button type="submit" class="btn btn-default" onclick="registerBoard()">등록</button>
+  <button type="submit" class="btn btn-default" id="registerBoard">등록</button>
   </c:if>
   <button type="reset" class="btn btn-default">취소</button>
     </div>

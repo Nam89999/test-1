@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.inflearn.note.mapper.NoteMapper">
+
+<!--받는 사람마다 쪽지 목록 불러오기 -->
+<select id="readNoteList" parameterType="Integer" resultType="noteVO">
+	SELECT n.note_id as noteId
+		  ,n.sender_id as senderNum
+		  ,n.recipient_id as recipientNum
+		  ,m.id as recipientMember
+		  ,n.title
+		  ,n.content
+		  ,n.regdate
+	FROM notebox n, member m
+	WHERE n.recipient_id = m.num AND n.recipient_id=#{recipientNum}
+</select>
+
+<!-- 발신인 아이디 불러오기 Java해결-->
+
+</mapper>
