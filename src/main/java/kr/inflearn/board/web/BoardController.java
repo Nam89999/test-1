@@ -1,4 +1,4 @@
-package kr.inflearn.web;
+package kr.inflearn.board.web;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import kr.inflearn.comment.model.CommentVO;
 import kr.inflearn.comment.service.CommentService;
 import kr.inflearn.member.model.MemberVO;
 import kr.inflearn.member.service.MemberService;
-import kr.inflearn.model.BoardVO;
-import kr.inflearn.service.BoardService;
+import kr.inflearn.board.model.BoardVO;
+import kr.inflearn.board.service.BoardService;
 
 @Controller
 public class BoardController {
@@ -87,11 +87,14 @@ public class BoardController {
 
 		try {
 
-			System.out.println("게시물 등록 정보:"+boardVO);
 			
 			int memberNum = (int) session.getAttribute("memberNum");
 			
-			System.out.println("게시물 작성자:"+memberNum);
+			System.out.println("registerBoard 게시물 작성자:"+memberNum);
+			
+			boardVO.setNum(memberNum);
+			
+			System.out.println("registerBoard 정보:"+boardVO);
 
 			// 서비스 호출
 			int result = boardService.registerBoard(boardVO);
@@ -254,7 +257,8 @@ public class BoardController {
 			// 로그인한 사용자의 memberID를 세션에서 뺴어 바구니에 넣어준다.(확인 필요)
 			commentVO.setNum(memberNum);
 
-			// 확인 System.out.println("comment-register controller: " + commentVO);
+			// 확인 
+			System.out.println("comment-register controller: " + commentVO);
 
 			// 댓글 등록 서비스 호출
 			String result = boardService.insertComment(commentVO);

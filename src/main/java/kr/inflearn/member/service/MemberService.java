@@ -20,5 +20,8 @@ public interface MemberService {
 	//회원정보 수정
 	public int memberUpdate(MemberVO memberVO);
 	
+	public MemberVO RecipientInfo(String id);
+ 
+	
 	
 }

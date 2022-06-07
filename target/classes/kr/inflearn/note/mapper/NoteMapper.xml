@@ -2,19 +2,51 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kr.inflearn.note.mapper.NoteMapper">
 
-<!--받는 사람마다 쪽지 목록 불러오기 -->
-<select id="readNoteList" parameterType="Integer" resultType="noteVO">
-	SELECT n.note_id as noteId
-		  ,n.sender_id as senderNum
-		  ,n.recipient_id as recipientNum
-		  ,m.id as recipientMember
-		  ,n.title
-		  ,n.content
-		  ,n.regdate
-	FROM notebox n, member m
-	WHERE n.recipient_id = m.num AND n.recipient_id=#{recipientNum}
-</select>
+	<!--받는 사람마다 쪽지 목록 불러오기 -->
+	<select id="readNoteList" parameterType="Integer"
+		resultType="noteVO">
+		SELECT n.note_id as noteId
+		,n.sender_id as senderNum
+		,n.recipient_id as recipientNum
+		,m.id as recipientMember
+		,n.title
+		,n.content
+		,n.regdate
+		,n.read_check as readCheck
+		FROM notebox n, member m
+		WHERE n.recipient_id = m.num AND n.recipient_id=#{recipientNum}
+	</select>
 
-<!-- 발신인 아이디 불러오기 Java해결-->
+
+	<!-- 쪽지 보내기 -->
+	<insert id="insertNote" parameterType="noteVO">
+		INSERT INTO
+		notebox(sender_id, recipient_id, title, content)
+		VALUES(#{senderNum},#{recipientNum},#{title},#{content})
+	</insert>
+
+	<!-- 쪽지 상세보기 -->
+	<select id="readNoteContent" parameterType="Integer"
+		resultType="noteVO">
+		SELECT n.note_id as noteId
+		,n.sender_id as senderNum
+		,n.recipient_id as recipientNum
+		,m.id as recipientMember
+		,n.title
+		,n.content
+		,n.regdate
+		,n.read_check as readCheck
+		FROM notebox n, member m
+		WHERE n.recipient_id = m.num AND n.note_id=#{noteId}
+	</select>
+    
+    
+	<!--쪽지 수신 확인-->
+	<update id="updateReadCheck" parameterType="Integer">
+		UPDATE notebox 
+		SET read_check= '1'
+		WHERE note_id=#{noteId}	
+	</update>
+	
 
 </mapper>

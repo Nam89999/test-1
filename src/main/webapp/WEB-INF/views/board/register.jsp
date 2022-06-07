@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,15 +15,13 @@ function registerBoard(){
 	alert('확인');
 	var title = $('#title').val();
     var contents = $('#contents').val();
-    var num= $('#num').val();
     
     $.ajax({
 		type : "POST",
 		url : 'registerBoard.do',
 		data : {
 			title : title,
-			contents : contents,
-			num : num
+			contents : contents
 		},
 		success : function(response) {
 			if (response == "false"){
@@ -50,7 +46,7 @@ function registerBoard(){
 <body>
  
 <div class="container">
-  <h2>Board Register</h2>
+  <h2>쪽지 쓰기</h2>
   <div class="panel panel-default">
     <div class="panel-heading">게시판 올리기</div>
     <div class="panel-body">
@@ -64,12 +60,10 @@ function registerBoard(){
   </div>
   <div class="form-group">
     <label>writer</label>
-    <input type="hidden" class="form-control" id="num" readonly="readonly">
     <input type="text" class="form-control" value="${memberId}" readonly="readonly">
   </div>
-    <button type="submit" class="btn btn-default" onclick="registerBoard()">등록</button>
   <c:if test="${sessionScope.memberNum!= null && sessionScope.memberNum!= ''}">
-  <button type="submit" class="btn btn-default" id="registerBoard">등록</button>
+    <button type="submit" class="btn btn-default" onclick="registerBoard()">등록</button>
   </c:if>
   <button type="reset" class="btn btn-default">취소</button>
     </div>

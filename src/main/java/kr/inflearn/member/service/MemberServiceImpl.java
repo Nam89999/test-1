@@ -59,4 +59,11 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	@Override
+	public MemberVO RecipientInfo(String id) {
+
+		return memberMapper.RecipientInfo(id);
+		
+	}
+
 }

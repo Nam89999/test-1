@@ -27,7 +27,7 @@
 	    <property name="locations" value="/WEB-INF/mybatis/db.properties"/>
 	</bean>
 	
-	<mybatis-spring:scan base-package="kr.inflearn.mapper"/> 
+	<mybatis-spring:scan base-package="kr.inflearn.board.mapper"/> 
 	<mybatis-spring:scan base-package="kr.inflearn.member.mapper"/> 
 	<mybatis-spring:scan base-package="kr.inflearn.comment.mapper"/> 
 	<mybatis-spring:scan base-package="kr.inflearn.note.mapper"/> 

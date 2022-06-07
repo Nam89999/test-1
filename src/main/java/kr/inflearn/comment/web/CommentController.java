@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import kr.inflearn.comment.model.CommentVO;
 import kr.inflearn.comment.model.ReCommentVO;
 import kr.inflearn.comment.service.CommentService;
-import kr.inflearn.service.BoardService;
+import kr.inflearn.board.service.BoardService;
 
 @Controller
 public class CommentController {

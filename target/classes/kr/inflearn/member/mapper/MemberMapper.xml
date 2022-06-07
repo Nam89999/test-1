@@ -25,7 +25,9 @@
     where id=#{id}
 </update>
 
-
+<select id="RecipientInfo" parameterType="String" resultType="memberVO">
+	select *from member where id=#{id}
+</select>
 
 </mapper>
 

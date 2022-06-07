@@ -127,6 +127,7 @@ create table notebox(
 		 title varchar(100) not null,
          content varchar(200) not null,
          regdate datetime not null default current_timestamp,
+         read_check int not null default '0',
 	     primary key(note_id)
 
  );
@@ -152,4 +153,12 @@ DROP table notebox;
 SELECT *
 FROM notebox n, member m
 WHERE n.recipient_id = m.num AND n.recipient_id = 2;
+
+SELECT *
+FROM notebox n, member m
+WHERE n.recipient_id = m.num AND n.note_id=1;
+
+UPDATE notebox 
+SET read_check='0'
+
 

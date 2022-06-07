@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import kr.inflearn.comment.mapper.CommentMapper;
 import kr.inflearn.comment.model.CommentVO;
 import kr.inflearn.comment.model.ReCommentVO;
-import kr.inflearn.mapper.BoardMapper;
+import kr.inflearn.board.mapper.BoardMapper;
 
 @Service
 public class CommentServiceImpl implements CommentService {

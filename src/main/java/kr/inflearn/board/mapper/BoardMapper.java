@@ -1,11 +1,11 @@
-package kr.inflearn.mapper;
+package kr.inflearn.board.mapper;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import kr.inflearn.comment.model.CommentVO;
 import kr.inflearn.member.model.MemberVO;
-import kr.inflearn.model.BoardVO;
+import kr.inflearn.board.model.BoardVO;
 
 @Mapper
 public interface BoardMapper {

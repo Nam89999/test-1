@@ -24,6 +24,9 @@ public interface MemberMapper {
 	//회원 수정 (update)
 	public int updatemember(MemberVO mvo);
 	
+	//쪽지 수신인 ID로 불러오기 
+	public MemberVO RecipientInfo(String id);
+	
 }
 
 	

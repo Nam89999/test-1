@@ -24,7 +24,7 @@
 <body>
  
 <div class="container">
-  <h2>메인화면<h2>
+  <h2>메인화면</h2>
   <div class="panel panel-default">
     <div class="panel-heading">Spring WEB MVC 게시판 만들기
     <button id="regBtn" type="button" class="btn btn-xs pull-right btn-primary">게시물쓰기</button>

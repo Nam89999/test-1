@@ -1,4 +1,4 @@
-package kr.inflearn.service;
+package kr.inflearn.board.service;
 
 import java.util.List;
 
@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.inflearn.comment.model.CommentVO;
-import kr.inflearn.mapper.BoardMapper;
+import kr.inflearn.board.mapper.BoardMapper;
 import kr.inflearn.member.model.MemberVO;
-import kr.inflearn.model.BoardVO;
+import kr.inflearn.board.model.BoardVO;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -114,7 +114,7 @@ public class BoardServiceImpl implements BoardService {
 		// board 글쓴이 불러오기
 		BoardVO boardInfo = boardMapper.readBoardContents(boardnum);
 		int boardWriter = boardInfo.getNum();
-		System.out.println("게시물 작성자 번호:" + boardWriter);
+		//System.out.println("readCommentList-Service 게시물 작성자 번호:" + boardWriter);
 
 		// 게시글 작성자 댓글에는 흔적 남기기
 		// for 문으로 댓글 목록을 돌리고

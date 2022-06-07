@@ -1,4 +1,4 @@
-package kr.inflearn.model;
+package kr.inflearn.board.model;
 
 import java.util.Date;
 

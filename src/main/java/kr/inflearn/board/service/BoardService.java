@@ -1,10 +1,10 @@
-package kr.inflearn.service;
+package kr.inflearn.board.service;
 
 import java.util.List;
 
 import kr.inflearn.comment.model.CommentVO;
 import kr.inflearn.member.model.MemberVO;
-import kr.inflearn.model.BoardVO;
+import kr.inflearn.board.model.BoardVO;
 
 public interface BoardService {
 	//선언만 해주고 정의는 BoardServiceImpl

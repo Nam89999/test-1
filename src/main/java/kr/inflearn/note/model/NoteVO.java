@@ -15,6 +15,7 @@ public class NoteVO {
 	private Date regdate;// 쪽지 발송 시간
 	private String senderMember;//발송인 Id
 	private String recipientMember;//수신인Id
+	private int readCheck;// 수신 유무확인
 	
 	//Getter Setter
 	public int getNoteId() {
@@ -52,9 +53,13 @@ public class NoteVO {
 	}
 	public void setRegdate(Date regdate) {
 		this.regdate = regdate;
+	}	
+	public int getReadCheck() {
+		return readCheck;
 	}
-	
-	
+	public void setReadCheck(int readCheck) {
+		this.readCheck = readCheck;
+	}
 	public String getSenderMember() {
 		return senderMember;
 	}
@@ -71,12 +76,10 @@ public class NoteVO {
 	
 	//Constructor
 	
-	
-	
 	public NoteVO() {}
-	
+
 	public NoteVO(int noteId, int senderNum, int recipientNum, String title, String content, Date regdate,
-			String senderMember, String recipientMember) {
+			String senderMember, String recipientMember, int readCheck) {
 		super();
 		this.noteId = noteId;
 		this.senderNum = senderNum;
@@ -86,17 +89,20 @@ public class NoteVO {
 		this.regdate = regdate;
 		this.senderMember = senderMember;
 		this.recipientMember = recipientMember;
+		this.readCheck = readCheck;
 	}
-
 	//toString
 
 	@Override
 	public String toString() {
 		return "NoteVO [noteId=" + noteId + ", senderNum=" + senderNum + ", recipientNum=" + recipientNum + ", title="
 				+ title + ", content=" + content + ", regdate=" + regdate + ", senderMember=" + senderMember
-				+ ", recipientMember=" + recipientMember + "]";
+				+ ", recipientMember=" + recipientMember + ", readCheck=" + readCheck + "]";
 	}
 	
+	
+
+
 
 	
 	
